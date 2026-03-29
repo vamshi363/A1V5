@@ -21,6 +21,7 @@ import { SkillPage } from './pages/SkillPage';
 import { RoadmapPage } from './pages/RoadmapPage';
 import QuizPage from './pages/QuizPage';
 import ResultsPage from './pages/ResultsPage';
+import JEECalculatorPage from './pages/JEECalculatorPage';
 
 // Component to scroll to top on route change
 const ScrollToTop = () => {
@@ -53,6 +54,7 @@ const App: React.FC = () => {
           <Route path="/courses/:slug" element={<CoursePage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/results" element={<ResultsPage />} />
+          <Route path="/jee-marks-calculator" element={<JEECalculatorPage />} />
           <Route path="/careers/:slug" element={<CareerPage />} />
           <Route path="/skills/:slug" element={<SkillPage />} />
           <Route path="/roadmaps/:slug" element={<RoadmapPage />} />
@@ -65,7 +67,7 @@ const App: React.FC = () => {
             <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8">
                <h1 className="text-3xl font-bold mb-4">Join After Inter</h1>
                <p className="text-slate-500 mb-8">Save your favorite colleges and track applications.</p>
-               <button className="bg-primary-teal text-white px-12 py-4 rounded-2xl font-bold shadow-lg">Sign In with Google</button>
+               <button className="bg-primary-green text-white px-12 py-4 rounded-2xl font-bold shadow-lg">Sign In with Google</button>
             </div>
           } />
         </Routes>

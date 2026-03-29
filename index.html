@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,27 +12,17 @@
         theme: {
           extend: {
             colors: {
-              slate: {
-                950: '#020617',
-              },
-              navy: {
-                DEFAULT: '#0A0F1E',
-                light: '#111827',
-                dark: '#060A14',
-              },
-              electric: {
-                DEFAULT: '#3B82F6',
-                light: '#60A5FA',
-                dark: '#2563EB',
-              },
-              accent: {
-                DEFAULT: '#F59E0B',
-                light: '#FBBF24',
-                dark: '#D97706',
+              'primary-green': '#047857',
+              'electric-blue': '#1D4ED8',
+              'saffron': '#EA580C',
+              'gov-blue': '#1E3A5F',
+              'slate': {
+                950: '#0f172a',
               }
             },
             fontFamily: {
               heading: ['Outfit', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
             }
           }
         }
@@ -41,85 +31,40 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1e293b;
         }
         .font-heading {
             font-family: 'Outfit', sans-serif;
         }
-        .bg-primary-teal { background-color: #00BFA6; }
-        .text-primary-teal { color: #00BFA6; }
-        .border-primary-teal { border-color: #00BFA6; }
-        .bg-secondary-purple { background-color: #9C27B0; }
-        .text-secondary-purple { color: #9C27B0; }
         
-        /* New homepage colors */
-        .bg-navy { background-color: #0A0F1E; }
-        .text-electric { color: #3B82F6; }
-        .bg-electric { background-color: #3B82F6; }
-        .text-accent-orange { color: #F59E0B; }
-        .bg-accent-orange { background-color: #F59E0B; }
-
         /* Particle animation */
         @keyframes float-particle {
-            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
         }
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(59, 130, 246, 0.4);
+            background: #047857;
             border-radius: 50%;
-            animation: float-particle linear infinite;
+            pointer-events: none;
         }
 
-        /* Pulse glow for CTA */
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.2); }
-        }
-        .glow-pulse { animation: pulse-glow 2s ease-in-out infinite; }
-
-        /* Gradient text */
-        .text-gradient {
-            background: linear-gradient(135deg, #3B82F6, #F59E0B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Glassmorphism card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Gold / Silver / Bronze glow for results cards */
-        @keyframes gold-pulse {
-            0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.3), 0 0 30px rgba(255,165,0,0.15); }
-            50% { box-shadow: 0 0 25px rgba(255,215,0,0.5), 0 0 50px rgba(255,165,0,0.25); }
-        }
-        @keyframes silver-pulse {
-            0%, 100% { box-shadow: 0 0 12px rgba(192,192,192,0.25), 0 0 24px rgba(148,163,184,0.1); }
-            50% { box-shadow: 0 0 20px rgba(192,192,192,0.4), 0 0 40px rgba(148,163,184,0.2); }
-        }
-        @keyframes bronze-pulse {
-            0%, 100% { box-shadow: 0 0 12px rgba(205,127,50,0.25), 0 0 24px rgba(180,83,9,0.1); }
-            50% { box-shadow: 0 0 20px rgba(205,127,50,0.4), 0 0 40px rgba(180,83,9,0.2); }
-        }
-        .gold-glow { animation: gold-pulse 2.5s ease-in-out infinite; }
-        .silver-glow { animation: silver-pulse 2.5s ease-in-out infinite; }
-        .bronze-glow { animation: bronze-pulse 2.5s ease-in-out infinite; }
-
-        /* Utility for hiding scrollbar but allowing scroll */
+        /* Netflix-style scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+
+        /* Circular Progress Rings for IKIGAI */
+        .progress-ring__circle {
+          transition: stroke-dashoffset 0.8s ease-in-out;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
         }
     </style>
 <script type="importmap">
@@ -137,7 +82,7 @@
 }
 </script>
 </head>
-<body class="bg-slate-950 text-slate-100 transition-colors duration-200">
+<body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>
