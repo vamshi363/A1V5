@@ -35,75 +35,19 @@ const AnimatedUnderline: React.FC<{ delay?: number }> = ({ delay = 0.5 }) => {
 
 // ─── Hero Career Preview Data ───────────────────────────────────────────────
 type CareerPreview = { emoji: string; name: string; match: number; salary: string; demand: string; course: string; colleges: string; demandColor: string };
-const HERO_CAREERS: Record<string, CareerPreview[]> = {
-  default: [
-    { emoji: '💻', name: 'Software Engineer / AI Developer', match: 94, salary: '₹6L – ₹25L/yr', demand: '🔥 Very High', course: 'B.Tech CSE', colleges: '📍 JNTU Hyd • NIT Warangal • BITS', demandColor: 'bg-red-50 text-red-600' },
-    { emoji: '🩺', name: 'Doctor / MBBS', match: 87, salary: '₹8L – ₹35L/yr', demand: '🔥 Very High', course: 'MBBS', colleges: '📍 Osmania Medical • Gandhi Medical', demandColor: 'bg-red-50 text-red-600' },
-    { emoji: '🎨', name: 'UI/UX Designer', match: 81, salary: '₹5L – ₹20L/yr', demand: '✅ High', course: 'B.Des', colleges: '📍 NIFT • Woxsen University', demandColor: 'bg-green-50 text-green-600' },
-  ],
-  MPC: [
-    { emoji: '💻', name: 'Software Engineer / AI Developer', match: 94, salary: '₹6L – ₹25L/yr', demand: '🔥 Very High', course: 'B.Tech CSE', colleges: '📍 JNTU Hyd • NIT Warangal • BITS', demandColor: 'bg-red-50 text-red-600' },
-    { emoji: '🏗️', name: 'Architect / Civil Engineer', match: 85, salary: '₹4L – ₹18L/yr', demand: '⚡ Growing', course: 'B.Arch', colleges: '📍 JNAFAU • NIT Warangal', demandColor: 'bg-amber-50 text-amber-600' },
-    { emoji: '📊', name: 'Data Scientist', match: 82, salary: '₹8L – ₹30L/yr', demand: '🔥 Very High', course: 'B.Tech + MS', colleges: '📍 IIT Hyd • IIIT Hyd', demandColor: 'bg-red-50 text-red-600' },
-  ],
-  BiPC: [
-    { emoji: '🩺', name: 'Doctor / MBBS', match: 94, salary: '₹8L – ₹35L/yr', demand: '🔥 Very High', course: 'MBBS', colleges: '📍 Osmania Medical • Gandhi Medical', demandColor: 'bg-red-50 text-red-600' },
-    { emoji: '🧬', name: 'Pharmacist / Biotech', match: 87, salary: '₹4L – ₹15L/yr', demand: '⚡ Growing', course: 'B.Pharm', colleges: '📍 NIPER Hyd • AU Vizag', demandColor: 'bg-amber-50 text-amber-600' },
-    { emoji: '🏃', name: 'Physiotherapist', match: 81, salary: '₹4L – ₹12L/yr', demand: '✅ High', course: 'BPT', colleges: '📍 NTR Health Univ • SVIMS', demandColor: 'bg-green-50 text-green-600' },
-  ],
-  'MEC/CEC': [
-    { emoji: '📊', name: 'Chartered Accountant', match: 94, salary: '₹7L – ₹22L/yr', demand: '✅ High', course: 'B.Com + CA', colleges: '📍 Osmania • St Josephs', demandColor: 'bg-green-50 text-green-600' },
-    { emoji: '🚀', name: 'Entrepreneur / MBA', match: 87, salary: '₹5L – ₹50L+/yr', demand: '🔥 Very High', course: 'BBA / MBA', colleges: '📍 ISB Hyd • IIM Vizag', demandColor: 'bg-red-50 text-red-600' },
-    { emoji: '💼', name: 'Investment Banker', match: 81, salary: '₹10L – ₹40L/yr', demand: '✅ High', course: 'B.Com Hons', colleges: '📍 Loyola • Christ Univ', demandColor: 'bg-green-50 text-green-600' },
-  ],
-  'HEC/Arts': [
-    { emoji: '🏛️', name: 'Civil Services / IAS', match: 94, salary: '₹6L – ₹18L/yr', demand: '✅ High', course: 'BA / B.Sc', colleges: '📍 Nizam College • Osmania', demandColor: 'bg-green-50 text-green-600' },
-    { emoji: '⚖️', name: 'Lawyer / Legal', match: 87, salary: '₹5L – ₹25L/yr', demand: '✅ High', course: 'BA LLB', colleges: '📍 NALSAR Hyd • Pendekanti', demandColor: 'bg-green-50 text-green-600' },
-    { emoji: '📚', name: 'Psychologist / Professor', match: 81, salary: '₹4L – ₹12L/yr', demand: '⚡ Growing', course: 'BA Psychology', colleges: '📍 Osmania • EFLU Hyd', demandColor: 'bg-amber-50 text-amber-600' },
-  ],
-};
 
-const AVATARS = [
-  { initial: 'P', gradient: 'from-pink-400 to-rose-500' },
-  { initial: 'R', gradient: 'from-blue-400 to-indigo-500' },
-  { initial: 'S', gradient: 'from-green-400 to-emerald-500' },
-  { initial: 'A', gradient: 'from-amber-400 to-orange-500' },
-  { initial: 'K', gradient: 'from-purple-400 to-violet-500' },
-];
 
 // ─── MAIN COMPONENT ─────────────────────────────────────────────────────────
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [stickyDismissed, setStickyDismissed] = useState(false);
-  const [selectedStream, setSelectedStream] = useState<string | null>(null);
-  const [activeCareerIdx, setActiveCareerIdx] = useState(0);
+  
+  
 
-  useEffect(() => {
-    const saved = localStorage.getItem('student_stream');
-    if (saved) setSelectedStream(saved);
-  }, []);
-
-  const handleStreamSelect = (stream: string) => {
-    if (selectedStream === stream) {
-      setSelectedStream(null);
-      localStorage.removeItem('student_stream');
-    } else {
-      setSelectedStream(stream);
-      localStorage.setItem('student_stream', stream);
-    }
-    setActiveCareerIdx(0);
-  };
-
-  // Career cycling every 3s
-  useEffect(() => {
-    const careers = HERO_CAREERS[selectedStream || 'default'];
-    const interval = setInterval(() => {
-      setActiveCareerIdx(prev => (prev + 1) % careers.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [selectedStream]);
-
+  
+  
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 400 && !stickyDismissed) setShowStickyBar(true);
@@ -130,13 +74,7 @@ const HomePage: React.FC = () => {
     { name: 'Harsha V.', location: 'Nizamabad', text: 'Free and actually useful. No spam. No fake promises. Genuine career guidance 🙌', time: '1 week ago' },
   ];
 
-  const streams = [
-    { id: 'MPC', title: 'MPC', sub: 'Maths, Physics, Chem', icon: '📐', theme: 'blue', hoverBg: 'hover:bg-[#EFF6FF]', hoverBorder: 'hover:border-[#2563EB]', hoverText: 'group-hover:text-[#2563EB]', activeBg: 'bg-[#EFF6FF]', activeBorder: 'border-[#2563EB]', activeText: 'text-[#2563EB]' },
-    { id: 'BiPC', title: 'BiPC', sub: 'Biology, Physics, Chem', icon: '🔬', theme: 'green', hoverBg: 'hover:bg-[#F0FDF4]', hoverBorder: 'hover:border-[#047857]', hoverText: 'group-hover:text-[#047857]', activeBg: 'bg-[#F0FDF4]', activeBorder: 'border-[#047857]', activeText: 'text-[#047857]' },
-    { id: 'MEC/CEC', title: 'MEC/CEC', sub: 'Commerce Stream', icon: '💼', theme: 'gold', hoverBg: 'hover:bg-[#FFFBEB]', hoverBorder: 'hover:border-[#D97706]', hoverText: 'group-hover:text-[#D97706]', activeBg: 'bg-[#FFFBEB]', activeBorder: 'border-[#D97706]', activeText: 'text-[#D97706]' },
-    { id: 'HEC/Arts', title: 'HEC/Arts', sub: 'Humanities Stream', icon: '🎭', theme: 'purple', hoverBg: 'hover:bg-[#FDF4FF]', hoverBorder: 'hover:border-[#9333EA]', hoverText: 'group-hover:text-[#9333EA]', activeBg: 'bg-[#FDF4FF]', activeBorder: 'border-[#9333EA]', activeText: 'text-[#9333EA]' },
-  ];
-
+  
   // Define the base 8 cards as per strict spec rules
   const baseCards = [
     {
@@ -217,38 +155,7 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  // Derive which cards to prioritize based on the selected stream
-  const getCardsForStream = () => {
-    // We do NOT create different card sets. We just reorder and optionally emphasize.
-    // Spec rule 5: the default order is very strict for the general view.
-    let cards = [...baseCards];
-    
-    // Simple reordering based on stream
-    if (selectedStream === 'MPC') {
-      // Bring JEE calc right after the first 2-col IKIGAI card, before courses
-      const jee = cards.find(c => c.id === 'jee-calc')!;
-      const beyondEamcet = cards.find(c => c.id === 'beyond-eamcet')!;
-      cards = cards.filter(c => c.id !== 'jee-calc' && c.id !== 'beyond-eamcet');
-      cards.splice(1, 0, jee, beyondEamcet); // Insert immediately after IKIGAI
-    } else if (selectedStream === 'BiPC') {
-      // Bring NEET card up
-      const neet = cards.find(c => c.id === 'neet')!;
-      cards = cards.filter(c => c.id !== 'neet');
-      cards.splice(1, 0, neet);
-    } else if (selectedStream === 'MEC/CEC' || selectedStream === 'HEC/Arts') {
-      // De-prioritize engineering/medical cards by pushing them to the end
-      const calc = cards.find(c => c.id === 'jee-calc')!;
-      const eamcet = cards.find(c => c.id === 'beyond-eamcet')!;
-      const neet = cards.find(c => c.id === 'neet')!;
-      cards = cards.filter(c => !['jee-calc', 'beyond-eamcet', 'neet'].includes(c.id));
-      cards.push(calc, eamcet, neet);
-    }
-    
-    return cards;
-  };
-
-  const displayCards = getCardsForStream();
-
+  
   return (
     <div className="min-h-screen bg-white text-[#0F172A] pb-16 md:pb-0">
 
@@ -275,331 +182,263 @@ const HomePage: React.FC = () => {
         <span className="text-white text-sm font-semibold text-center">⏰ JEE Session 2 Results expected April 20 — Calculate your marks now →</span>
       </motion.div>
 
-      {/* ═══════════════ SECTION 3: HERO (Premium Rebuild) ═══════════════ */}
-      <section className="relative min-h-[90vh] flex flex-col justify-center bg-[#F8FAFC] overflow-hidden pt-12 pb-20 px-4 md:px-8 border-b border-slate-200">
+      {/* ═══════════════ SECTION 3: HERO — "THE DIGITAL DIPLOMAT" ═══════════════ */}
+      <section className="relative min-h-[92vh] flex flex-col justify-center bg-[#F8FAFC] overflow-hidden pt-10 pb-16 px-4 md:px-8">
         
-        {/* Aceternity-style Beams / Globs */}
+        {/* ── Background: Engineering Dot Grid + Ambient Glows ── */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-[20%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-gradient-to-br from-[#047857]/10 to-transparent blur-[100px]" />
-          <div className="absolute top-[40%] -left-[10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-tr from-[#2563EB]/10 to-transparent blur-[100px]" />
-          
-          {/* Subtle Grid Background */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTUsIDIzLCA0MiwgMC4wNSkiLz48L3N2Zz4=')] [mask-image:linear-gradient(to_bottom,white,transparent)] opacity-60" />
+          <div className="absolute inset-0 dot-grid-bg" />
+          <div className="absolute top-[15%] -right-[8%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-bl from-[#047857]/8 to-transparent blur-[140px]" />
+          <div className="absolute bottom-[5%] -left-[8%] w-[35vw] h-[35vw] rounded-full bg-gradient-to-tr from-[#EA580C]/6 to-transparent blur-[140px]" />
+          <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full bg-gradient-to-b from-[#047857]/3 to-transparent blur-[200px]" />
         </div>
 
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+        {/* ── Live Activity Counter (Floating Top) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, ...SPRING_SOFT }}
+          className="absolute top-4 left-1/2 -translate-x-1/2 z-20"
+        >
+          <div className="bg-white/90 backdrop-blur-xl border border-[#047857]/15 rounded-full px-5 py-2 shadow-[0_4px_30px_-10px_rgba(4,120,87,0.15)] flex items-center gap-3">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#047857]" />
+            </span>
+            <span className="text-xs font-bold text-[#0F172A]">
+              <span className="font-numbers text-[#047857]">742</span> students exploring careers right now
+            </span>
+          </div>
+        </motion.div>
+
+        <div className="max-w-[85rem] mx-auto w-full grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-14 items-center relative z-10">
           
-          {/* ─── LEFT: CONTENT ─── */}
-          <div className="lg:col-span-6 flex flex-col items-start">
+          {/* ─── LEFT: THE AUTHORITY (Text + Trust + CTA) ─── */}
+          <div className="xl:col-span-5 flex flex-col items-start pt-14 xl:pt-0">
             
-            {/* Government Trust Badge */}
+            {/* Trust Badge Pill */}
             <motion.div 
               initial={{ opacity: 0, y: -20, scale: 0.9 }} 
               animate={{ opacity: 1, y: 0, scale: 1 }} 
-              transition={{ type: "spring", bounce: 0.5, duration: 0.8 }}
-              className="inline-flex items-center gap-2.5 bg-white border border-[#047857]/20 shadow-sm rounded-full px-4 py-2 text-sm font-semibold text-[#047857] mb-8"
+              transition={{ ...SPRING_BOUNCE, delay: 0.1 }}
+              className="inline-flex items-center gap-2.5 bg-white border border-[#047857]/15 shadow-[0_4px_24px_-6px_rgba(4,120,87,0.12)] rounded-full px-4 py-2 text-[13px] font-bold text-[#047857] mb-8"
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#047857] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#047857]"></span>
-              </span>
-              🏛️ Official Guidance • Telangana & AP
+              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              100% Free • Data-Driven • AP & TS Students
             </motion.div>
 
-            {/* Headline */}
-            <h1 className="text-[2.75rem] md:text-6xl font-extrabold text-[#0F172A] leading-[1.15] tracking-tight mb-6">
-              Find Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#047857] to-[#10B981]">Perfect Career</span>
-              <br />
-              <span className="relative inline-block mt-2">
-                After Inter.
-                <AnimatedUnderline delay={0.4} />
+            {/* Massive Headline */}
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, ...SPRING_BOUNCE }}
+              className="text-[2.75rem] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[4.25rem] font-extrabold text-[#0F172A] leading-[1.08] tracking-tight mb-5 font-heading"
+            >
+              Your Career{' '}
+              <span className="relative inline-block">
+                <span className="text-[#047857]">Blueprint</span>
+                <AnimatedUnderline delay={0.8} />
               </span>
-            </h1>
+              <br />
+              After Inter.
+            </motion.h1>
 
-            {/* "What you get" staggered list */}
+            {/* Sub-headline */}
             <motion.p 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg text-[#64748B] mb-6 font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, ...SPRING_BOUNCE }}
+              className="text-base md:text-lg text-[#475569] mb-8 font-medium max-w-md leading-relaxed"
             >
-              Take our 3-minute AI quiz to instantly unlock:
+              AI-powered career matching, 150+ courses, scholarship finder, and exam tracking — all free, all in one place.
             </motion.p>
-            
-            <motion.ul 
-              variants={{
-                hidden: { opacity: 0 },
-                show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.4 } }
-              }}
-              initial="hidden"
-              animate="show"
-              className="space-y-3 mb-10 w-full max-w-md"
-            >
-              {[
-                { emoji: "🎯", text: "Top 3 personalized career matches" },
-                { emoji: "📚", text: "Exact courses clearly mapped out" },
-                { emoji: "🏛️", text: "Best colleges in AP & Telangana" },
-                { emoji: "📝", text: "Which entrance exams to write" },
-                { emoji: "💰", text: "Hidden scholarships you qualify for" }
-              ].map((item, i) => (
-                <motion.li 
-                  key={i}
-                  variants={{
-                    hidden: { opacity: 0, x: -20 },
-                    show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
-                  }}
-                  className="flex items-center gap-3 bg-white/60 backdrop-blur-sm border border-slate-200/50 p-3 rounded-xl shadow-sm"
-                >
-                  <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#F0FDF4] text-lg shrink-0">
-                    {item.emoji}
-                  </span>
-                  <span className="text-[#0F172A] font-semibold text-[15px]">{item.text}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
 
-            {/* Big CTA */}
+            {/* Primary CTA */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.8, type: "spring", stiffness: 300, damping: 20 }}
-              className="w-full sm:w-auto flex flex-col items-center sm:items-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, ...SPRING_BOUNCE }}
+              className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto"
             >
               <motion.button 
-                whileHover={{ scale: 1.03, boxShadow: "0 20px 40px -15px rgba(234, 88, 12, 0.5)" }}
+                whileHover={{ scale: 1.03, boxShadow: "0 24px 48px -16px rgba(4,120,87,0.4)" }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/quiz')}
-                className="w-full sm:w-auto bg-[#EA580C] hover:bg-[#C2410C] text-white font-bold rounded-full py-4 px-10 text-lg shadow-[0_8px_30px_rgb(234,88,12,0.3)] flex items-center justify-center gap-2 transition-colors relative overflow-hidden group"
+                className="w-full sm:w-auto bg-[#047857] text-white font-bold rounded-full py-4 px-8 text-lg shadow-[0_10px_35px_rgba(4,120,87,0.25)] flex items-center justify-center gap-3 relative overflow-hidden group cursor-pointer"
               >
-                {/* Shine effect (defined in index.html) */}
                 <span className="absolute inset-0 w-full h-full -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shine" />
-                <span>Start Free Discovery</span>
-                <svg className="w-5 h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                <span className="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-pulse shrink-0" />
+                Start IKIGAI Quiz
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </motion.button>
-              
-              {/* Trust Subtext */}
-              <div className="flex items-center gap-4 mt-4 text-[13px] font-semibold text-[#64748B]">
-                <span className="flex items-center gap-1"><span className="text-[#047857]">✓</span> 100% Free</span>
-                <span className="w-1 h-1 rounded-full bg-slate-300" />
-                <span className="flex items-center gap-1"><span className="text-[#047857]">✓</span> No Signup needed</span>
-              </div>
+              <motion.button
+                whileHover={{ scale: 1.03, backgroundColor: '#F0FDF4' }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => navigate('/courses')}
+                className="w-full sm:w-auto bg-white border-2 border-[#047857]/20 text-[#047857] font-bold rounded-full py-4 px-8 text-base cursor-pointer shadow-sm flex items-center justify-center gap-2"
+              >
+                Explore All Tools
+              </motion.button>
             </motion.div>
 
-            {/* Social Proof Avatars */}
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              transition={{ delay: 1 }}
-              className="flex items-center gap-3 mt-10"
+            {/* Quick Stats */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="mt-8 flex items-center gap-6 text-sm text-[#64748B]"
             >
-              <div className="flex -space-x-3">
-                {['👨‍💻', '👩‍⚕️', '👷‍♂️', '👩‍⚖️', '👨‍🏫'].map((emoji, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ scale: 0, x: -20 }}
-                    animate={{ scale: 1, x: 0 }}
-                    transition={{ delay: 1.1 + (i * 0.1), type: "spring", stiffness: 400, damping: 25 }}
-                    className="w-10 h-10 rounded-full bg-white border-2 border-[#F8FAFC] shadow-sm flex items-center justify-center text-lg relative"
-                    style={{ zIndex: 10 - i }}
-                  >
-                    {emoji}
-                  </motion.div>
-                ))}
-              </div>
-              <div className="flex flex-col">
-                <div className="flex text-[#F59E0B] text-sm">★★★★★</div>
-                <span className="text-sm font-bold text-[#0F172A]">Joined by 47,832+ students</span>
-              </div>
+              <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">47K+</span> Students</span>
+              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">150+</span> Courses</span>
+              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">200+</span> Colleges</span>
             </motion.div>
-
           </div>
 
-          {/* ─── RIGHT: LIVE GENERATIVE PREVIEW ─── */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95, y: 20 }} 
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 24, delay: 0.4 }}
-            style={{ perspective: '2000px' }}
-            className="lg:col-span-6 w-full max-w-lg mx-auto lg:ml-auto relative"
-          >
-            {/* Main Premium Card Container - Glassmorphic */}
-            <div className="relative w-full bg-white/80 backdrop-blur-xl border border-white/50 rounded-3xl p-6 shadow-[0_40px_100px_-20px_rgba(4,120,87,0.15)] ring-1 ring-slate-900/5">
-              
-              {/* Card Header */}
-              <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-100">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse" />
-                    <span className="text-[11px] font-bold text-[#10B981] uppercase tracking-wider">Live Analysis</span>
-                  </div>
-                  <h3 className="text-sm text-[#64748B] font-semibold">Generating perfect match...</h3>
-                </div>
-                <div className="w-10 h-10 rounded-full bg-[#F1F5F9] flex items-center justify-center">
-                  <span className="text-xl">✨</span>
-                </div>
-              </div>
-
-              {/* Cycling Career Item */}
-              <AnimatePresence mode="wait">
+          {/* ─── RIGHT: THE ENGINE (INTERACTIVE BENTO DASHBOARD) ─── */}
+          <div className="xl:col-span-7 w-full relative mt-6 xl:mt-0">
+             <motion.div 
+               variants={staggerContainer}
+               initial="hidden"
+               animate="show"
+               className="grid grid-cols-6 gap-4 md:gap-5 auto-rows-[minmax(140px,auto)]"
+             >
+                {/* ── Node 1: IKIGAI Engine (Large, 4-col, 2-row) ── */}
                 <motion.div 
-                  key={activeCareerIdx + (selectedStream || 'default')}
-                  initial={{ opacity: 0, x: 20, filter: "blur(4px)" }} 
-                  animate={{ opacity: 1, x: 0, filter: "blur(0)" }}
-                  exit={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-                  transition={{ type: "spring", stiffness: 350, damping: 25, duration: 0.3 }}
-                  className="bg-white rounded-2xl border border-slate-100 p-5 shadow-sm"
+                  variants={staggerItem}
+                  whileHover={{ y: -6, scale: 1.015, boxShadow: "0 30px 70px -20px rgba(4,120,87,0.18)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/quiz')}
+                  className="col-span-6 sm:col-span-4 row-span-2 bg-white/90 backdrop-blur-xl border border-[#047857]/10 rounded-[1.75rem] p-6 shadow-[0_20px_60px_-15px_rgba(4,120,87,0.1)] flex flex-col relative overflow-hidden cursor-pointer group"
                 >
-                  {(() => {
-                    const careers = (selectedStream && HERO_CAREERS[selectedStream]) ? HERO_CAREERS[selectedStream] : HERO_CAREERS.default;
-                    const career = careers[activeCareerIdx % careers.length] || careers[0];
-                    return (
-                      <>
-                        <div className="flex gap-4 items-start mb-4">
-                          <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-3xl shadow-inner shrink-0 border border-slate-100/50">
-                            {career.emoji}
-                          </div>
-                          <div>
-                            <h4 className="text-lg font-bold text-[#0F172A] leading-tight mb-1">{career.name}</h4>
-                            <div className="flex flex-wrap gap-2">
-                              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#ECFDF5] text-[#047857] border border-[#047857]/10">
-                                Match: {career.match}%
-                              </span>
-                              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#EFF6FF] text-[#2563EB] border border-[#2563EB]/10">
-                                {career.salary}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                   {/* Top Row: Label + Arrow */}
+                   <div className="flex items-start justify-between mb-2">
+                     <div>
+                       <h3 className="text-xl font-extrabold text-[#0F172A] font-heading">AI Career Matcher</h3>
+                       <p className="text-[13px] text-[#64748B] font-medium mt-0.5">IKIGAI Assessment • 3 min quiz</p>
+                     </div>
+                     <div className="w-10 h-10 rounded-full bg-[#ECFDF5] flex items-center justify-center text-[#047857] group-hover:bg-[#047857] group-hover:text-white transition-all duration-200 shrink-0">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                     </div>
+                   </div>
 
-                        {/* Match Bar */}
-                        <div className="mb-4">
-                          <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                            <motion.div 
-                              initial={{ width: 0 }} 
-                              animate={{ width: `${career.match}%` }}
-                              transition={{ duration: 1, ease: "easeOut", type: "spring", bounce: 0 }}
-                              className="h-full bg-gradient-to-r from-[#10B981] to-[#047857] rounded-full" 
-                            />
-                          </div>
-                        </div>
-                        
-                        {/* Requirement Chips */}
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2 text-[13px] bg-slate-50 border border-slate-100 p-2 rounded-lg">
-                            <span className="w-5 text-center text-slate-400">📚</span>
-                            <span className="font-semibold text-[#0F172A] truncate">{career.course}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-[13px] bg-slate-50 border border-slate-100 p-2 rounded-lg">
-                            <span className="w-5 text-center text-slate-400">🏛️</span>
-                            <span className="text-[#64748B] font-medium truncate">{career.colleges}</span>
-                          </div>
-                        </div>
-                      </>
-                    );
-                  })()}
+                   {/* Breathing SVG Ring + Cycling Avatars */}
+                   <div className="flex-1 flex items-center justify-center relative">
+                      <svg className="w-44 h-44 transform -rotate-90" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#F1F5F9" strokeWidth="6" />
+                        <motion.circle 
+                           cx="50" cy="50" r="42" fill="none" stroke="url(#ikigaiGrad)" strokeWidth="6" strokeLinecap="round"
+                           initial={{ strokeDasharray: 264, strokeDashoffset: 264 }}
+                           animate={{ strokeDashoffset: [264, 50, 264] }}
+                           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                        <defs>
+                          <linearGradient id="ikigaiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stopColor="#047857" />
+                            <stop offset="100%" stopColor="#10B981" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                      {/* Orbiting Avatars */}
+                      <motion.div 
+                         animate={{ rotate: 360 }} 
+                         transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                         className="w-44 h-44 absolute rounded-full"
+                      >
+                         <span className="absolute -top-1 left-1/2 -translate-x-1/2 text-2xl drop-shadow-md">👨‍💻</span>
+                         <span className="absolute top-1/2 -right-1 -translate-y-1/2 text-2xl drop-shadow-md">👩‍⚕️</span>
+                         <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-2xl drop-shadow-md">⚖️</span>
+                         <span className="absolute top-1/2 -left-1 -translate-y-1/2 text-2xl drop-shadow-md">🎨</span>
+                      </motion.div>
+                      {/* Center Icon */}
+                      <div className="absolute text-3xl bg-white shadow-lg p-3.5 rounded-2xl z-10 border border-[#047857]/10">🎯</div>
+                   </div>
+
+                   {/* Bottom Chip */}
+                   <div className="mt-3 flex items-center gap-2">
+                     <span className="bg-[#ECFDF5] text-[#047857] text-[11px] font-bold px-3 py-1 rounded-full">🔥 Most Popular</span>
+                     <span className="text-[11px] text-[#64748B] font-medium">47,832 students matched</span>
+                   </div>
                 </motion.div>
-              </AnimatePresence>
 
-              {/* Progress Dots */}
-              <div className="flex justify-center gap-2 mt-5">
-                {HERO_CAREERS[selectedStream || 'default'].map((_, i) => (
-                  <motion.div 
-                    key={i} 
-                    className={`h-1.5 rounded-full transition-colors ${i === (activeCareerIdx % 3) ? 'bg-[#047857]' : 'bg-slate-200'}`}
-                    animate={{ width: i === (activeCareerIdx % 3) ? 24 : 6 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  />
-                ))}
-              </div>
-            </div>
+                {/* ── Node 2: Course Library (Tall, 2-col, 2-row) ── */}
+                <motion.div 
+                  variants={staggerItem}
+                  whileHover={{ y: -6, scale: 1.015, boxShadow: "0 25px 60px -20px rgba(37,99,235,0.15)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/courses')}
+                  className="col-span-3 sm:col-span-2 row-span-2 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-[1.75rem] p-5 shadow-[0_10px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col cursor-pointer group overflow-hidden relative"
+                >
+                   <h3 className="text-[17px] font-extrabold text-[#0F172A] mb-0.5 z-10 group-hover:text-[#2563EB] transition-colors leading-tight font-heading">Course Library</h3>
+                   <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider mb-3 z-10">150+ Courses</p>
+                   
+                   {/* Vertical Scrolling Marquee */}
+                   <div className="flex-1 relative overflow-hidden -mx-1" style={{ maskImage: "linear-gradient(to bottom, transparent, black 8%, black 75%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent, black 8%, black 75%, transparent 100%)" }}>
+                      <motion.div 
+                         animate={{ y: [0, -380] }}
+                         transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                         className="flex flex-col gap-2 px-1"
+                      >
+                         {['B.Tech CSE', 'MBBS', 'B.Des', 'CA', 'B.Arch', 'Pharm.D', 'BBA', 'BA LLB', 'B.Sc Ag', 'BPT', 'BMS', 'BSW', 'B.Tech ECE', 'BAMS', 'B.Tech CSE', 'MBBS', 'B.Des', 'CA'].map((course, i) => (
+                           <div key={i} className="bg-[#F8FAFC] border border-slate-100 py-2 px-3 rounded-xl text-[12px] font-semibold text-slate-600 whitespace-nowrap text-center">
+                              {course}
+                           </div>
+                         ))}
+                      </motion.div>
+                   </div>
+                </motion.div>
 
-            {/* Floating Floating Cards (Decorations) */}
-            <motion.div 
-              animate={{ y: [0, -10, 0] }} 
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 -right-6 lg:-right-10 bg-white rounded-2xl shadow-xl p-4 border border-slate-100 z-20 flex items-center gap-3 backdrop-blur-md"
-            >
-              <div className="w-8 h-8 rounded-full bg-[#FEF3C7] text-[#D97706] flex items-center justify-center text-lg">💰</div>
-              <div>
-                <p className="text-[11px] font-bold text-[#0F172A]">Scholarship Found!</p>
-                <p className="text-[10px] text-[#64748B]">Eligible for TS Epass</p>
-              </div>
-            </motion.div>
+                {/* ── Node 3: College & Scholarship Finder (Wide, 4-col, 1-row) ── */}
+                <motion.div 
+                  variants={staggerItem}
+                  whileHover={{ y: -6, scale: 1.015, boxShadow: "0 28px 60px -20px rgba(234,88,12,0.25)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/universities')}
+                  className="col-span-6 sm:col-span-4 row-span-1 bg-gradient-to-br from-[#EA580C] to-[#C2410C] rounded-[1.75rem] p-5 md:p-6 shadow-[0_20px_50px_-15px_rgba(234,88,12,0.25)] flex flex-col justify-center cursor-pointer relative overflow-hidden group"
+                >
+                   {/* Decorative blur */}
+                   <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+                   
+                   <div className="flex items-center justify-between mb-3 relative z-10">
+                     <div>
+                       <p className="text-white/70 font-bold text-[10px] uppercase tracking-wider mb-0.5">Colleges & Scholarships</p>
+                       <h3 className="text-lg md:text-xl font-extrabold text-white font-heading leading-tight">Find ₹Lakhs in Govt. Funds</h3>
+                     </div>
+                     <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center group-hover:bg-white/25 transition-colors shrink-0">
+                       <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                     </div>
+                   </div>
+                   
+                   {/* Typewriter Search Bar */}
+                   <div className="bg-white/10 p-3 rounded-xl border border-white/15 flex items-center gap-3 w-full backdrop-blur-sm relative z-10">
+                      <span className="text-white/40 text-lg">🔍</span>
+                      <TypewriterSearch />
+                   </div>
+                </motion.div>
 
-            <motion.div 
-              animate={{ y: [0, 10, 0] }} 
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -bottom-6 -left-6 lg:-left-10 bg-[#0F172A] rounded-2xl shadow-xl p-4 border border-slate-800 z-20 flex items-center gap-3"
-            >
-              <div className="w-8 h-8 rounded-full bg-[#1E293B] text-white flex items-center justify-center text-lg">🚀</div>
-              <div>
-                <p className="text-[11px] font-bold text-white">Path Unlocked</p>
-                <p className="text-[10px] text-slate-400">Engineering Roadmap</p>
-              </div>
-            </motion.div>
+                {/* ── Node 4: Exams Beyond EAMCET (2-col, 1-row) ── */}
+                <motion.div 
+                  variants={staggerItem}
+                  whileHover={{ y: -6, scale: 1.015, boxShadow: "0 22px 50px -18px rgba(37,99,235,0.18)" }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/exam-finder')}
+                  className="col-span-3 sm:col-span-2 row-span-1 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-[1.75rem] p-5 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer group relative overflow-hidden"
+                >
+                   <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-[#EFF6FF] rounded-full blur-2xl" />
+                   
+                   <div className="flex items-start justify-between relative z-10">
+                     <h3 className="text-[15px] font-extrabold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors font-heading pr-2">Exams Beyond EAMCET</h3>
+                     <span className="text-lg shrink-0">📅</span>
+                   </div>
+                   
+                   {/* Mini Countdown */}
+                   <div className="bg-[#EFF6FF] rounded-xl py-2.5 px-3 flex items-center justify-center gap-3 mt-3 border border-[#2563EB]/8 relative z-10">
+                      <ExamCountdown />
+                   </div>
+                </motion.div>
 
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ─── STREAM SELECTOR PANEL ─── */}
-      <section className="px-4 py-8 bg-[#F8FAFC] border-b border-slate-200 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-6">
-            <div className="shrink-0 flex items-center gap-3 text-center md:text-left">
-              <span className="text-2xl hidden md:block">⚡</span>
-              <div>
-                <h3 className="text-sm font-bold text-[#0F172A]">Explore by your Inter Stream</h3>
-                <p className="text-xs text-[#64748B] font-medium hidden sm:block">Select below to preview specific careers above</p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 md:flex flex-wrap md:flex-nowrap gap-2 sm:gap-3 w-full md:w-auto">
-              {streams.map((stream) => {
-                const isActive = selectedStream === stream.id;
-                return (
-                  <motion.button 
-                    key={stream.id} 
-                    onClick={() => handleStreamSelect(stream.id)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.95 }} 
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className={`flex-1 md:w-32 py-3 px-3 rounded-xl flex items-center justify-center gap-2 cursor-pointer border-2 transition-all ${
-                      isActive 
-                        ? `${stream.activeBg} ${stream.activeBorder} shadow-sm ring-2 ring-offset-2 ring-transparent ring-offset-[#F8FAFC]` 
-                        : `bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-600`
-                    }`}
-                  >
-                    <span className="text-lg">{stream.icon}</span>
-                    <span className={`font-bold text-[13px] ${isActive ? stream.activeText : ''}`}>{stream.title}</span>
-                  </motion.button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 max-w-2xl mx-auto border-t border-slate-200/60 pt-6 mt-2">
-            
-            {/* Trust line */}
-            <p className="text-[13px] text-center text-[#64748B] font-medium flex items-center gap-2">
-              <span className="text-slate-400">🔒</span> 47,832 students helped · No signup
-            </p>
-
-            {/* JEE Urgency bar */}
-            <motion.div 
-              whileHover={{ scale: 1.02 }} 
-              whileTap={{ scale: 0.98 }} 
-              onClick={() => navigate('/jee-marks-calculator')}
-              className="bg-[#EA580C] rounded-full p-1.5 pl-3 flex items-center justify-between cursor-pointer w-full sm:w-auto shadow-sm"
-            >
-              <div className="flex items-center gap-2 text-white font-semibold text-xs sm:text-[13px] pr-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                ⏰ JEE Session 2 Results
-              </div>
-              <span className="bg-white text-[#EA580C] font-bold rounded-full px-3 py-1 text-xs whitespace-nowrap">Calculate Now →</span>
-            </motion.div>
-
+             </motion.div>
           </div>
 
         </div>
@@ -619,13 +458,13 @@ const HomePage: React.FC = () => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={selectedStream || 'default'}
+              key="default"
               variants={staggerContainer}
               initial="hidden"
               animate="show"
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5"
             >
-              {displayCards.map((card, index) => {
+              {baseCards.map((card, index) => {
                 const isIkigai = card.id === 'ikigai';
                 
                 // Determine staggered wave delay
@@ -1093,6 +932,85 @@ const HomePage: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
+  );
+};
+
+// ─── TypewriterSearch: Cycling search phrases for Scholarship/College node ────
+const SEARCH_PHRASES = [
+  "Top B.Tech Colleges in Telangana...",
+  "100% Free Scholarships for BC...",
+  "Best Medical Colleges in AP...",
+  "SC/ST Scholarship worth ₹2L...",
+  "Top Law Universities in India...",
+];
+
+const TypewriterSearch: React.FC = () => {
+  const [phraseIdx, setPhraseIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const phrase = SEARCH_PHRASES[phraseIdx];
+    if (!deleting && charIdx < phrase.length) {
+      const t = setTimeout(() => setCharIdx(c => c + 1), 45 + Math.random() * 30);
+      return () => clearTimeout(t);
+    }
+    if (!deleting && charIdx === phrase.length) {
+      const t = setTimeout(() => setDeleting(true), 2000);
+      return () => clearTimeout(t);
+    }
+    if (deleting && charIdx > 0) {
+      const t = setTimeout(() => setCharIdx(c => c - 1), 22);
+      return () => clearTimeout(t);
+    }
+    if (deleting && charIdx === 0) {
+      setDeleting(false);
+      setPhraseIdx(p => (p + 1) % SEARCH_PHRASES.length);
+    }
+  }, [charIdx, deleting, phraseIdx]);
+
+  return (
+    <span className="text-white font-semibold text-sm">
+      {SEARCH_PHRASES[phraseIdx].slice(0, charIdx)}
+      <span className="typing-cursor text-white/60">|</span>
+    </span>
+  );
+};
+
+// ─── ExamCountdown: Live countdown to next major exam ─────────────────────────
+const ExamCountdown: React.FC = () => {
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+
+  useEffect(() => {
+    // Target: JEE Mains Session 2 (approx date)
+    const target = new Date('2026-04-20T00:00:00');
+    const update = () => {
+      const now = new Date();
+      const diff = target.getTime() - now.getTime();
+      if (diff > 0) {
+        setDays(Math.floor(diff / (1000 * 60 * 60 * 24)));
+        setHours(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+      }
+    };
+    update();
+    const interval = setInterval(update, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-2 w-full justify-center">
+      <div className="flex flex-col items-center">
+        <span className="text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{days}</span>
+        <span className="text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Days</span>
+      </div>
+      <span className="text-[#3B82F6] font-bold text-lg leading-none">:</span>
+      <div className="flex flex-col items-center">
+        <span className="text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{hours}</span>
+        <span className="text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Hrs</span>
+      </div>
+      <span className="text-[9px] text-[#64748B] font-bold ml-1 leading-tight">JEE<br/>Results</span>
     </div>
   );
 };
