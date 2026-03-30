@@ -264,20 +264,23 @@ const HomePage: React.FC = () => {
                 whileHover={{ scale: 1.03, boxShadow: "0 24px 48px -16px rgba(4,120,87,0.4)" }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/quiz')}
-                className="w-full sm:w-auto bg-[#047857] text-white font-bold rounded-full py-4 px-8 text-lg shadow-[0_10px_35px_rgba(4,120,87,0.25)] flex items-center justify-center gap-3 relative overflow-hidden group cursor-pointer"
+                style={{ backgroundColor: '#047857', color: '#ffffff' }}
+                className="w-full sm:w-auto font-bold rounded-full py-4 px-8 text-lg shadow-[0_10px_35px_rgba(4,120,87,0.25)] flex items-center justify-center gap-3 relative overflow-hidden group cursor-pointer border-none"
               >
-                <span className="absolute inset-0 w-full h-full -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shine" />
-                <span className="w-2.5 h-2.5 rounded-full bg-[#EA580C] animate-pulse shrink-0" />
-                Start IKIGAI Quiz
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                <span className="absolute inset-0 w-full h-full -translate-x-[150%] skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-shine pointer-events-none" />
+                <span className="w-2.5 h-2.5 rounded-full animate-pulse shrink-0 relative z-10" style={{ backgroundColor: '#EA580C' }} />
+                <span className="relative z-10" style={{ color: '#ffffff' }}>Start IKIGAI Quiz</span>
+                <svg className="w-5 h-5 relative z-10" style={{ color: '#ffffff' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </motion.button>
+              
               <motion.button
-                whileHover={{ scale: 1.03, backgroundColor: '#F0FDF4' }}
+                whileHover={{ scale: 1.03, backgroundColor: '#F0FDF4', color: '#047857' }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/courses')}
-                className="w-full sm:w-auto bg-white border-2 border-[#047857]/20 text-[#047857] font-bold rounded-full py-4 px-8 text-base cursor-pointer shadow-sm flex items-center justify-center gap-2"
+                style={{ backgroundColor: '#ffffff', color: '#047857', borderColor: 'rgba(4,120,87,0.2)' }}
+                className="w-full sm:w-auto border-2 font-bold rounded-full py-4 px-8 text-base cursor-pointer shadow-sm flex items-center justify-center gap-2"
               >
-                Explore All Tools
+                <span style={{ color: '#047857' }}>Explore All Tools</span>
               </motion.button>
             </motion.div>
 
@@ -650,13 +653,14 @@ const HomePage: React.FC = () => {
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: '#047857', borderColor: '#047857' }}
+              whileHover={{ scale: 1.05, backgroundColor: '#047857', borderColor: '#047857', color: '#ffffff' }}
               whileTap={{ scale: 0.95 }}
               transition={SPRING_SOFT}
               onClick={() => navigate('/quiz')}
-              className="mt-10 border-2 border-[#10B981] text-[#10B981] font-bold rounded-full px-8 py-3 text-sm md:text-base hover:text-white transition-colors cursor-pointer w-full md:w-auto"
+              style={{ color: '#10B981', borderColor: '#10B981' }}
+              className="mt-10 border-2 font-bold rounded-full px-8 py-3 text-sm md:text-base transition-colors cursor-pointer w-full md:w-auto bg-transparent relative z-20 group"
             >
-              Find My Ideal Career Path →
+              <span className="group-hover:text-white transition-colors">Find My Ideal Career Path →</span>
             </motion.button>
           </div>
         </div>
@@ -822,17 +826,19 @@ const HomePage: React.FC = () => {
               whileHover={{ scale: 1.05, y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.3)' }}
               whileTap={{ scale: 0.97 }}
               onClick={() => navigate('/quiz')}
-              className="w-full sm:w-auto bg-white text-[#047857] rounded-full font-bold py-4 px-10 text-lg font-heading cursor-pointer shadow-xl flex items-center justify-center gap-2"
+              style={{ backgroundColor: '#ffffff', color: '#047857' }}
+              className="w-full sm:w-auto rounded-full font-bold py-4 px-10 text-lg font-heading cursor-pointer shadow-xl flex items-center justify-center gap-2 border-none"
             >
-              Start IKIGAI Quiz <ArrowRight size={20} />
+              <span style={{ color: '#047857' }}>Start IKIGAI Quiz</span> <ArrowRight size={20} />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.15)', borderColor: 'rgba(255,255,255,0.8)' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/courses')}
-              className="w-full sm:w-auto bg-white/10 border-2 border-white/50 backdrop-blur-sm text-white rounded-full py-4 px-10 text-lg font-bold cursor-pointer transition-colors flex items-center justify-center gap-2"
+              style={{ backgroundColor: 'rgba(255,255,255,0.1)', borderColor: 'rgba(255,255,255,0.5)', color: '#ffffff' }}
+              className="w-full sm:w-auto border-2 backdrop-blur-sm rounded-full py-4 px-10 text-lg font-bold cursor-pointer transition-colors flex items-center justify-center gap-2 text-white"
             >
-              Explore Courses
+              <span style={{ color: '#ffffff' }}>Explore Courses</span>
             </motion.button>
           </motion.div>
           
