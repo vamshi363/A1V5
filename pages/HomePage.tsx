@@ -198,14 +198,14 @@ const HomePage: React.FC = () => {
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, ...SPRING_SOFT }}
-          className="absolute top-4 left-1/2 -translate-x-1/2 z-20"
+          className="absolute top-6 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90vw]"
         >
-          <div className="bg-white/90 backdrop-blur-xl border border-[#047857]/15 rounded-full px-5 py-2 shadow-[0_4px_30px_-10px_rgba(4,120,87,0.15)] flex items-center gap-3">
-            <span className="relative flex h-2.5 w-2.5">
+          <div className="bg-white/90 backdrop-blur-xl border border-[#047857]/15 rounded-full px-4 sm:px-5 py-2 shadow-[0_4px_30px_-10px_rgba(4,120,87,0.15)] flex items-center justify-center gap-2 sm:gap-3">
+            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#047857]" />
+              <span className="relative inline-flex rounded-full h-full w-full bg-[#047857]" />
             </span>
-            <span className="text-xs font-bold text-[#0F172A]">
+            <span className="text-[11px] sm:text-xs font-bold text-[#0F172A] truncate">
               <span className="font-numbers text-[#047857]">742</span> students exploring careers right now
             </span>
           </div>
@@ -221,10 +221,10 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0, y: -20, scale: 0.9 }} 
               animate={{ opacity: 1, y: 0, scale: 1 }} 
               transition={{ ...SPRING_BOUNCE, delay: 0.1 }}
-              className="inline-flex items-center gap-2.5 bg-white border border-[#047857]/15 shadow-[0_4px_24px_-6px_rgba(4,120,87,0.12)] rounded-full px-4 py-2 text-[13px] font-bold text-[#047857] mb-8"
+              className="inline-flex mx-auto sm:mx-0 items-center justify-center gap-2 bg-white border border-[#047857]/15 shadow-[0_4px_24px_-6px_rgba(4,120,87,0.12)] rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-[13px] font-bold text-[#047857] mb-6 sm:mb-8"
             >
-              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              100% Free • Data-Driven • AP & TS Students
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              100% Free • Data-Driven • AP & TS
             </motion.div>
 
             {/* Massive Headline */}
@@ -232,7 +232,7 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, ...SPRING_BOUNCE }}
-              className="text-[2.75rem] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[4.25rem] font-extrabold text-[#0F172A] leading-[1.08] tracking-tight mb-5 font-heading"
+              className="text-[2.5rem] sm:text-[3.25rem] md:text-[3.75rem] lg:text-[4.25rem] font-extrabold text-[#0F172A] leading-[1.1] tracking-tight mb-4 sm:mb-5 font-heading text-center sm:text-left w-full"
             >
               Your Career{' '}
               <span className="relative inline-block">
@@ -248,9 +248,9 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, ...SPRING_BOUNCE }}
-              className="text-base md:text-lg text-[#475569] mb-8 font-medium max-w-md leading-relaxed"
+              className="text-[15px] md:text-lg text-[#475569] mb-8 font-medium max-w-md leading-relaxed text-center sm:text-left w-full mx-auto sm:mx-0"
             >
-              AI-powered career matching, 150+ courses, scholarship finder, and exam tracking — all free, all in one place.
+              AI-powered matching, 150+ courses, scholarship finder, and exam tracking — all free, all in one place.
             </motion.p>
 
             {/* Primary CTA */}
@@ -286,23 +286,23 @@ const HomePage: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="mt-8 flex items-center gap-6 text-sm text-[#64748B]"
+              className="mt-8 flex items-center justify-center sm:justify-start flex-wrap gap-x-5 gap-y-2 text-[13px] sm:text-sm text-[#64748B] w-full"
             >
               <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">47K+</span> Students</span>
-              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <span className="hidden sm:block w-1 h-1 rounded-full bg-slate-300" />
               <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">150+</span> Courses</span>
-              <span className="w-1 h-1 rounded-full bg-slate-300" />
+              <span className="hidden sm:block w-1 h-1 rounded-full bg-slate-300" />
               <span className="flex items-center gap-1.5 font-semibold"><span className="text-[#047857] font-numbers font-bold text-base">200+</span> Colleges</span>
             </motion.div>
           </div>
 
           {/* ─── RIGHT: THE ENGINE (INTERACTIVE BENTO DASHBOARD) ─── */}
-          <div className="xl:col-span-7 w-full relative mt-6 xl:mt-0">
+          <div className="xl:col-span-7 w-full relative mt-8 sm:mt-6 xl:mt-0">
              <motion.div 
                variants={staggerContainer}
                initial="hidden"
                animate="show"
-               className="grid grid-cols-6 gap-4 md:gap-5 auto-rows-[minmax(140px,auto)]"
+               className="grid grid-cols-6 grid-flow-dense gap-3 sm:gap-4 md:gap-5 auto-rows-[minmax(140px,auto)]"
              >
                 {/* ── Node 1: IKIGAI Engine (Large, 4-col, 2-row) ── */}
                 <motion.div 
@@ -368,10 +368,10 @@ const HomePage: React.FC = () => {
                   whileHover={{ y: -6, scale: 1.015, boxShadow: "0 25px 60px -20px rgba(37,99,235,0.15)" }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => navigate('/courses')}
-                  className="col-span-3 sm:col-span-2 row-span-2 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-[1.75rem] p-5 shadow-[0_10px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col cursor-pointer group overflow-hidden relative"
+                  className="col-span-3 sm:col-span-2 row-span-1 sm:row-span-2 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-2xl sm:rounded-[1.75rem] p-4 sm:p-5 shadow-[0_10px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col cursor-pointer group overflow-hidden relative min-h-[140px]"
                 >
-                   <h3 className="text-[17px] font-extrabold text-[#0F172A] mb-0.5 z-10 group-hover:text-[#2563EB] transition-colors leading-tight font-heading">Course Library</h3>
-                   <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider mb-3 z-10">150+ Courses</p>
+                   <h3 className="text-[15px] sm:text-[17px] font-extrabold text-[#0F172A] mb-0.5 z-10 group-hover:text-[#2563EB] transition-colors leading-tight font-heading">Course Library</h3>
+                   <p className="text-[9px] sm:text-[10px] text-[#64748B] font-bold uppercase tracking-wider mb-2 sm:mb-3 z-10">150+ Courses</p>
                    
                    {/* Vertical Scrolling Marquee */}
                    <div className="flex-1 relative overflow-hidden -mx-1" style={{ maskImage: "linear-gradient(to bottom, transparent, black 8%, black 75%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent, black 8%, black 75%, transparent 100%)" }}>
@@ -423,17 +423,17 @@ const HomePage: React.FC = () => {
                   whileHover={{ y: -6, scale: 1.015, boxShadow: "0 22px 50px -18px rgba(37,99,235,0.18)" }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => navigate('/exam-finder')}
-                  className="col-span-3 sm:col-span-2 row-span-1 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-[1.75rem] p-5 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer group relative overflow-hidden"
+                  className="col-span-3 sm:col-span-2 row-span-1 bg-white/90 backdrop-blur-xl border border-[#2563EB]/10 rounded-2xl sm:rounded-[1.75rem] p-4 sm:p-5 shadow-[0_15px_40px_-15px_rgba(37,99,235,0.08)] flex flex-col justify-between cursor-pointer group relative overflow-hidden"
                 >
                    <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-[#EFF6FF] rounded-full blur-2xl" />
                    
-                   <div className="flex items-start justify-between relative z-10">
-                     <h3 className="text-[15px] font-extrabold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors font-heading pr-2">Exams Beyond EAMCET</h3>
-                     <span className="text-lg shrink-0">📅</span>
+                   <div className="flex items-start justify-between relative z-10 mb-2">
+                     <h3 className="text-[13px] sm:text-[15px] font-extrabold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors font-heading pr-1">Exams Beyond EAMCET</h3>
+                     <span className="text-base sm:text-lg shrink-0 hidden sm:block">📅</span>
                    </div>
                    
                    {/* Mini Countdown */}
-                   <div className="bg-[#EFF6FF] rounded-xl py-2.5 px-3 flex items-center justify-center gap-3 mt-3 border border-[#2563EB]/8 relative z-10">
+                   <div className="bg-[#EFF6FF] rounded-lg sm:rounded-xl py-2 px-2 flex items-center justify-center gap-1.5 sm:gap-3 mt-auto border border-[#2563EB]/8 relative z-10 w-full object-contain">
                       <ExamCountdown />
                    </div>
                 </motion.div>
@@ -1000,17 +1000,17 @@ const ExamCountdown: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center gap-2 w-full justify-center">
+    <div className="flex items-center gap-1 sm:gap-2 w-full justify-center">
       <div className="flex flex-col items-center">
-        <span className="text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{days}</span>
-        <span className="text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Days</span>
+        <span className="text-[17px] sm:text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{days}</span>
+        <span className="text-[7px] sm:text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Days</span>
       </div>
-      <span className="text-[#3B82F6] font-bold text-lg leading-none">:</span>
+      <span className="text-[#3B82F6] font-bold text-base sm:text-lg leading-none mb-2">:</span>
       <div className="flex flex-col items-center">
-        <span className="text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{hours}</span>
-        <span className="text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Hrs</span>
+        <span className="text-[17px] sm:text-xl font-bold text-[#1D4ED8] font-numbers leading-none">{hours}</span>
+        <span className="text-[7px] sm:text-[8px] font-bold text-[#3B82F6] uppercase mt-0.5">Hrs</span>
       </div>
-      <span className="text-[9px] text-[#64748B] font-bold ml-1 leading-tight">JEE<br/>Results</span>
+      <span className="text-[7.5px] sm:text-[9px] text-[#64748B] font-bold ml-0.5 sm:ml-1 leading-tight text-left">JEE<br/>Results</span>
     </div>
   );
 };
