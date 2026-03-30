@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>After Inter | Find Your Perfect Career After 12th</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -21,8 +21,9 @@
               }
             },
             fontFamily: {
-              heading: ['Outfit', 'sans-serif'],
+              heading: ['Plus Jakarta Sans', 'Outfit', 'sans-serif'],
               body: ['Inter', 'sans-serif'],
+              numbers: ['Outfit', 'sans-serif'],
             }
           }
         }
@@ -35,9 +36,86 @@
             color: #1e293b;
         }
         .font-heading {
+            font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+        }
+        .font-numbers {
             font-family: 'Outfit', sans-serif;
         }
-        
+
+        /* Shimmer animation for gov bar */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+            animation: shimmer 3s infinite;
+        }
+
+        /* Dual direction ticker */
+        @keyframes ticker-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes ticker-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .animate-ticker-left {
+            animation: ticker-left 30s linear infinite;
+        }
+        .animate-ticker-right {
+            animation: ticker-right 30s linear infinite;
+        }
+        .animate-ticker-left:hover,
+        .animate-ticker-right:hover {
+            animation-play-state: paused;
+        }
+
+        /* Gradient shift CTA */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-shift {
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        /* IKIGAI circles breathing */
+        @keyframes breathe-1 {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        @keyframes breathe-2 {
+            0%, 100% { transform: scale(1.02); }
+            50% { transform: scale(0.99); }
+        }
+        @keyframes breathe-3 {
+            0%, 100% { transform: scale(0.99); }
+            50% { transform: scale(1.03); }
+        }
+        @keyframes breathe-4 {
+            0%, 100% { transform: scale(1.01); }
+            50% { transform: scale(0.98); }
+        }
+        .animate-breathe-1 { animation: breathe-1 4s ease-in-out infinite; }
+        .animate-breathe-2 { animation: breathe-2 4.5s ease-in-out infinite 0.5s; }
+        .animate-breathe-3 { animation: breathe-3 5s ease-in-out infinite 1s; }
+        .animate-breathe-4 { animation: breathe-4 4.2s ease-in-out infinite 1.5s; }
+
+        /* IKIGAI rotation for card bg */
+        @keyframes ikigai-rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .animate-ikigai-rotate {
+            animation: ikigai-rotate 20s linear infinite;
+        }
+        .group:hover .animate-ikigai-rotate {
+            animation-duration: 10s;
+        }
+
         /* Particle animation */
         @keyframes float-particle {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
@@ -65,6 +143,34 @@
           transition: stroke-dashoffset 0.8s ease-in-out;
           transform: rotate(-90deg);
           transform-origin: 50% 50%;
+        }
+
+        /* SVG dot grid pattern */
+        .dot-grid-bg {
+            background-image: radial-gradient(circle, #047857 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+            opacity: 0.04;
+        }
+
+        /* Ripple CTA animation */
+        @keyframes ripple-out {
+            0% { box-shadow: 0 0 0 0px rgba(234,88,12,0.4); }
+            100% { box-shadow: 0 0 0 12px rgba(234,88,12,0); }
+        }
+        .animate-ripple:hover {
+            animation: ripple-out 1s ease-out infinite;
+        }
+
+        /* Glow heartbeat */
+        @keyframes glow-heartbeat {
+            0%, 100% { box-shadow: 0 0 20px rgba(4,120,87,0.3); }
+            50% { box-shadow: 0 0 40px rgba(4,120,87,0.6); }
+        }
+
+        /* Button shimmer */
+        @keyframes btn-shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
         }
     </style>
 <script type="importmap">
