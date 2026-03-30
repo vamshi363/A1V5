@@ -61,6 +61,27 @@ export default function QuizPage() {
     window.scrollTo(0, 0);
   }, [currentIdx, phase]);
 
+  useEffect(() => {
+    if (phase === 'quiz') {
+      const savedStream = localStorage.getItem('student_stream');
+      if (savedStream) {
+        let streamAns = '';
+        let streamText = '';
+        if (savedStream === 'MPC') { streamAns = 'A'; streamText = 'MPC — Maths, Physics, Chemistry'; }
+        else if (savedStream === 'BiPC') { streamAns = 'B'; streamText = 'BiPC — Biology, Physics, Chemistry'; }
+        else if (savedStream === 'MEC/CEC') { streamAns = 'C'; streamText = 'MEC or CEC — Commerce stream'; }
+        else if (savedStream === 'HEC/Arts') { streamAns = 'D'; streamText = 'HEC or Arts — Humanities / Other'; }
+        
+        if (streamAns) {
+          setAnswers(prev => ({
+            ...prev,
+            15: { question: 15, answer: streamAns, text: streamText, pillar: 'stream' }
+          }));
+        }
+      }
+    }
+  }, [phase]);
+
   const handleSelect = (optionId: string, optionText: string) => {
     setAnswers(prev => ({
       ...prev,

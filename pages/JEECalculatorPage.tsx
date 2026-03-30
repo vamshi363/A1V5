@@ -281,8 +281,6 @@ export default function JEECalculatorPage() {
     };
   };
 
-  const examRec = getExamRecommendation();
-  const strongSubj = getStrongestSubject();
   const SubjectCard = ({ label, value, color, icon, delay, max = 100 }: { label: string, value: number, color: string, icon: React.ReactNode, delay: number, max?: number }) => {
     const animatedValue = useAnimatedCounter(value, 2, step === 'results');
     

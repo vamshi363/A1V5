@@ -22,6 +22,8 @@ import { RoadmapPage } from './pages/RoadmapPage';
 import QuizPage from './pages/QuizPage';
 import ResultsPage from './pages/ResultsPage';
 import JEECalculatorPage from './pages/JEECalculatorPage';
+import CertificateCheckerPage from './pages/CertificateCheckerPage';
+import LifeAfterNeetPage from './pages/LifeAfterNeetPage';
 
 // Component to scroll to top on route change
 const ScrollToTop = () => {
@@ -55,6 +57,8 @@ const App: React.FC = () => {
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/jee-marks-calculator" element={<JEECalculatorPage />} />
+          <Route path="/certificate-checker" element={<CertificateCheckerPage />} />
+          <Route path="/life-after-neet" element={<LifeAfterNeetPage />} />
           <Route path="/careers/:slug" element={<CareerPage />} />
           <Route path="/skills/:slug" element={<SkillPage />} />
           <Route path="/roadmaps/:slug" element={<RoadmapPage />} />
