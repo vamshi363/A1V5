@@ -430,9 +430,17 @@ const HomePage: React.FC = () => {
                 >
                    <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-[#EFF6FF] rounded-full blur-2xl" />
                    
-                   <div className="flex items-start justify-between relative z-10 mb-2">
-                     <h3 className="text-[13px] sm:text-[15px] font-extrabold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors font-heading pr-1">Exams Beyond EAMCET</h3>
+                   <div className="flex items-start justify-between relative z-10 mb-1.5 sm:mb-2">
+                     <h3 className="text-[14px] sm:text-[15px] font-extrabold text-[#0F172A] leading-tight group-hover:text-[#2563EB] transition-colors font-heading pr-1">Exams Beyond EAMCET</h3>
                      <span className="text-base sm:text-lg shrink-0 hidden sm:block">📅</span>
+                   </div>
+
+                   <div className="flex flex-wrap gap-1.5 mb-2 relative z-10">
+                      {['JEE', 'BITSAT', 'VITEEE', 'CUET', 'NDA', 'NATA'].map((exam, i) => (
+                        <span key={i} className="text-[9px] sm:text-[11px] font-bold bg-[#EFF6FF] text-[#1D4ED8] px-2 py-0.5 rounded-md border border-[#2563EB]/20 shadow-sm leading-none flex items-center">
+                          {exam}
+                        </span>
+                      ))}
                    </div>
                    
                    {/* Mini Countdown */}
