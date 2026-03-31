@@ -436,7 +436,7 @@ const HomePage: React.FC = () => {
                    </div>
 
                    <div className="flex flex-wrap gap-1.5 mb-2 relative z-10">
-                      {['JEE', 'BITSAT', 'VITEEE', 'CUET', 'NDA', 'NATA'].map((exam, i) => (
+                      {['JEE', 'BITSAT', 'VITEEE', 'CUET', 'NDA', 'NATA', 'POLYCET', 'ICAR', 'CLAT', 'UGEE'].map((exam, i) => (
                         <span key={i} className="text-[9px] sm:text-[11px] font-bold bg-[#EFF6FF] text-[#1D4ED8] px-2 py-0.5 rounded-md border border-[#2563EB]/20 shadow-sm leading-none flex items-center">
                           {exam}
                         </span>

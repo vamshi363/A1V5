@@ -102,12 +102,13 @@ const Navbar = () => {
                 className="w-full flex items-center space-x-4"
               >
                  <form onSubmit={handleSearchSubmit} className="relative flex-grow">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gov-blue/50" size={20} />
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                     <input 
                       ref={inputRef}
                       type="text" 
                       placeholder="Search colleges, exams, scholarships..."
-                      className="w-full pl-12 pr-4 py-3 bg-white border-none rounded-2xl outline-none font-bold text-gov-blue placeholder:text-gov-blue/30"
+                      className="w-full pl-12 pr-4 py-3 bg-white border-none rounded-2xl outline-none font-bold placeholder:text-slate-400 text-slate-900"
+                      style={{ color: '#1E3A5F' }}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
